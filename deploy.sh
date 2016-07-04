@@ -37,6 +37,14 @@ else
     echo "install ctags"
     brew install ctags
 fi
+tmp=$(bash --version | grep 'version 3\.')
+if [ "$tmp" == "" ]; then
+    ret="${ret}\nbash at version $(bash --version), ignore"
+else
+    echo "install bash (brew version)"
+    brew install bash
+    ret="${ret}\n!!!! bash installed, version: $(bash --version)"
+fi
 if [ ! -e /Applications/iTerm.app ]; then
     echo "install iTerm2"
     brew install Caskroom/cask/iterm2
