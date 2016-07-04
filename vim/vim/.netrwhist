@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/cedric.le.coz/work/rdk/smoke-test/support-stuff/winpcap/Include'
+let g:netrw_dirhist_2='/Users/cedric.le.coz/work/rdk/smoke-test/support-stuff/winpcap/Include/pcap'
+let g:netrw_dirhist_3='/Users/cedric.le.coz/dotfiles/vim/vim/bundle/TeTrIs.vim'
+let g:netrw_dirhist_4='/Users/cedric.le.coz/dotfiles/vim/vim/bundle/TeTrIs.vim/plugin'
+let g:netrw_dirhist_5='/Users/cedric.le.coz/dotfiles'
+let g:netrw_dirhist_6='/Users/cedric.le.coz/AVIRER/dotfiles'
+let g:netrw_dirhist_7='/Users/cedric.le.coz/AVIRER/dotfiles/vim'
+let g:netrw_dirhist_8='/Users/cedric.le.coz/AVIRER/dotfiles'
+let g:netrw_dirhist_9='/Users/cedric.le.coz/AVIRER/dotfiles/vim'

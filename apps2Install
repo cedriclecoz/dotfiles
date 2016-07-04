@@ -1,0 +1,23 @@
+XCode ?
+
+Repo:
+    Brew: http://brew.sh
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    
+Windows management : 
+    Spectacle: http://spectacleapp.com/
+
+Keyboard management:
+    Karabiner: https://pqrs.org/osx/karabiner/
+
+Edition:
+    Macvim: brew install macvim
+        config: Once launched, run :NeoBundleInstall to download plugins.
+    
+Terminal:
+    iTerm2: https://www.iterm2.com/
+        config: Profiles / General tab / Command / Command: ~/dotfiles/tmux_start.sh
+                Profiles / Colors tab / Backgrounf : 3d0736
+
+
+        

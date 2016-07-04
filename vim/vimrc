@@ -1,0 +1,110 @@
+
+"NeoBundle Scripts-----------------------------
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
+
+  " Required:
+  set runtimepath+=/Users/cedric.le.coz/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#begin(expand('/Users/cedric.le.coz/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+"NeoBundle 'Shougo/neosnippet.vim'
+"NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+"NeoBundle 'ctrlpvim/ctrlp.vim'
+"NeoBundle 'flazz/vim-colorschemes'
+"NeoBundle 'mileszs/ack.vim'
+NeoBundle 'vim-scripts/taglist.vim'
+"NeoBuldle 'majutsushi/tagbar.vim'
+NeoBundle 'fholgado/minibufexpl.vim'
+NeoBundle 'vim-scripts/TeTrIs.vim'
+
+
+" You can specify revision/branch/tag.
+"NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+"NeoBundleCheck
+"End NeoBundle Scripts-------------------------
+
+
+"Highlight search 
+set hlsearch
+
+"Vi Theme
+colors evening
+
+"indent 4spaces
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+"display line numbers
+set number
+"---------------------------------------------------------------------------
+"Highlight when line > 80 columns
+
+
+function! Show_80col_trailingWhiteSpace()
+    highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
+    if &colorcolumn
+        :set colorcolumn=
+        match ExtraWhitespace //
+        echo 'Hiding 80 column + Trailing White Spaces'
+    else
+        :set colorcolumn=80
+        match ExtraWhitespace /\s\+$/
+        echo 'Showing 80 columns + Trailing White Spaces'
+    endif
+endfunction
+
+function RunWith (command)
+  execute "w"
+  execute "!clear;time " . a:command . " " . expand("%")
+endfunction
+
+
+function! Save_and_launch()
+    execute "w"
+    if &filetype == "python"
+        execute '!python' shellescape(@%, 1)
+    elseif &filetype == "sh"
+        execute '!sh' shellescape(@%, 1)
+    elseif &filetype == "perl"
+        execute '!perl' shellescape(@%, 1)
+    else
+        echo "File type not set in ~/.bashrc... unable to execute." 
+    endif
+endfunction
+
+
+"Key mapping
+  "map <F2> key to display the 80char margin
+    map <F2>          :call Show_80col_trailingWhiteSpace()<CR>
+  "map <F4> key to display file Tree
+    map <F4>          :TlistToggle<CR>
+    "map <F4>          :TagbarToogle<CR>
+  "map <F9> key to execute the current python script
+    nnoremap <buffer> <F9> :call Save_and_launch()<CR>
+
+  "save in sudo using :W
+    cmap W! execute 'silent w !sudo tee > /dev/null %' \| edit!
+
+let g:Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
