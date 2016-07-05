@@ -52,6 +52,13 @@ if [ ! -e /Applications/iTerm.app ]; then
 else
     ret="${ret}\niTerm2 already exist, ignore"
 fi
+if [ $(which tmux) ]; then
+    ret="${ret}\ngit already installed, ignore"
+else
+    echo "install tmux"
+    brew install tmux
+fi
+
 if [ $(which gvim) ]; then
     ret="${ret}\nmacvim(gvim) already installed, ignore"
 else
@@ -95,6 +102,14 @@ if [ ! -e ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim ]; then
     git clone git://github.com/Shougo/neobundle.vim.git ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim
 else
     ret="${ret}\nneobundle.vim already exist, ignore"
+fi
+
+if [ ! -e pyenv ]; then
+    echo "clone pyenv"
+    git clone https://github.com/yyuu/pyenv.git pyenv
+    ln -sf ${CUR_FOLDER}/pyenv ~/.pyenv
+else
+    ret="${ret}\npyenv already present, ignore"
 fi
 
 cmd="sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist"
