@@ -1,4 +1,3 @@
-
 "NeoBundle Scripts-----------------------------
 if has('vim_starting')
   if &compatible
@@ -6,11 +5,11 @@ if has('vim_starting')
   endif
 
   " Required:
-  set runtimepath+=/Users/cedric.le.coz/.vim/bundle/neobundle.vim/
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 " Required:
-call neobundle#begin(expand('/Users/cedric.le.coz/.vim/bundle'))
+call neobundle#begin(expand('~/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
