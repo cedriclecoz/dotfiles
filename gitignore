@@ -12,13 +12,10 @@
 *.diff
 *logdir/*
 *.swp
-lint_changed.sh
-lint_settings.sh
 response-files/
 .old.*
 bak.*
 *.bak
-launch_lint.sh
 .~*.xlsx#
 201*.log
 *.o
