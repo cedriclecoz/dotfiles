@@ -95,7 +95,13 @@ if [ ! -e ~/.inputrc ]; then
 else
     ret="${ret}\n~/.inputrc already exist, ignore"
 fi
-
+if [ ! -e ~/.gitignore ]; then
+    echo 'deploy gitignore'
+    ln -sf ${CUR_FOLDER}/gitignore ~/.gitignore
+else
+    ret="${ret}\n~/.gitignore already exist, ignore"
+    ret="${ret}\n    maybe check if ./gitignore and ~/.gitignore can be merged, and a symbolic link created"
+fi
 mkdir -p ${CUR_FOLDER}/vim/vim/bundle
 if [ ! -e ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim ]; then
     echo "clone neobundle.vim"
