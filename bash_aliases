@@ -18,10 +18,9 @@ function mktags {
     ~/.bash_scripts/mktags.sh $@&
 }
 
-osType=`echo $OSTYPE`
-macstr="darwin15.4.0"
+macstr="Darwin"
 tmux_bin=
-if [ "$osType" == "$macstr" ]; then
+if [ "$(uname)" == "$macstr" ]; then
     tmux_bin="/usr/local/bin/tmux"
 else
     tmux_bin="/usr/bin/tmux"
@@ -199,7 +198,6 @@ On_ICyan="\[\033[0;106m\]"    # Cyan
 On_IWhite="\[\033[0;107m\]"   # White
 
 
-
 # Various variables you might want for your PS1 prompt instead
 Time12h="\T"
 Time12a="\@"
@@ -211,7 +209,7 @@ Date='\D{%m.%d}'
 Uname="\u"
 Hostname="\h"
 
-if [ "$osType" == "$macstr" ]; then
+if [ "$(uname)" == "$macstr" ]; then
     source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
     source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
     GIT_PS1_SHOWDIRTYSTATE=true
