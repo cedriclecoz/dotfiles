@@ -9,6 +9,7 @@ Windows management :
 
 Keyboard management:
     Karabiner: https://pqrs.org/osx/karabiner/
+        a configuration file is present in configuration_files/Karabiner/.. to copy in ~/
 
 Edition:
     Macvim: brew install macvim
