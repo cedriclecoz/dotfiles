@@ -9,11 +9,11 @@ echo "    .bashrc"
 echo "    .vim"
 echo "    .vimrc"
 echo "    .inputrc"
-echo " - install brew if not already installed  (NOT TESTED)"
-echo " - install up-to-date bash if current version is 3.*  (NOT TESTED)"
-echo " - install gvim if not already installed  (NOT TESTED)"
-echo " - install iTerm2 if not already installed  (NOT TESTED)"
-echo " - install ctags if not already installed  (NOT TESTED)"
+echo " - install brew if not already installed"
+echo " - install up-to-date bash if current version is 3.* (brew version)"
+echo " - install gvim if not already installed (brew version)"
+echo " - install iTerm2 if not already installed (brew version)"
+echo " - install ctags if not already installed (brew version)"
 echo " - launch locate service"
 
 
@@ -32,12 +32,6 @@ else
     echo "install git"
     brew install git
 fi
-if [ $(which ctags) ]; then
-    ret="${ret}\ngit already installed, ignore"
-else
-    echo "install ctags"
-    brew install ctags
-fi
 tmp=$(bash --version | grep 'version 3\.')
 if [ "$tmp" == "" ]; then
     ret="${ret}\nbash at version $(bash --version), ignore"
@@ -45,6 +39,12 @@ else
     echo "install bash (brew version)"
     brew install bash
     ret="${ret}\n!!!! bash installed, version: $(bash --version)"
+fi
+if [ -e /usr/local/bin/ctags ]; then
+    ret="${ret}\ngit already installed, ignore"
+else
+    echo "install ctags"
+    brew install ctags
 fi
 if [ ! -e /Applications/iTerm.app ]; then
     echo "install iTerm2"
