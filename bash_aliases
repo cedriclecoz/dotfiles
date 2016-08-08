@@ -248,14 +248,4 @@ if [ -e ~/.project_aliases ]; then
     source ~/.project_aliases
 fi
 
-#autostart a tmux session
-if [ "${TMUX}" == "" ]; then
-   tmux
-fi
-#source tmux config file
-if [ "${TMUX}" != "" ]; then
-   if [ -e ~/dotfiles/tmux.conf ]; then
-       tmux source-file ~/dotfiles/tmux.conf
-   fi
-fi
 

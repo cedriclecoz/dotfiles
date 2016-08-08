@@ -126,6 +126,17 @@ if [ -d ~/dotfiles/scripts ] && ! shopt -oq posix; then
     . ~/dotfiles/scripts/*.sh
 fi
 
+#autostart a tmux session
+if [ "${TMUX}" == "" ]; then
+   tmux
+fi
+#source tmux config file
+if [ "${TMUX}" != "" ]; then
+   if [ -e ~/dotfiles/tmux.conf ]; then
+       tmux source-file ~/dotfiles/tmux.conf
+   fi
+fi
+
 export GVIM_TAGS="CSCOPE_CTAGS"
 
 #[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
@@ -138,4 +149,4 @@ export PATH="~/bin:$PATH"
 
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
+
