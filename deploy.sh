@@ -17,6 +17,10 @@ if [ "$(uname)" == "$macstr" ]; then
     echo " - install iTerm2 if not already installed (brew version)"
     echo " - install ctags if not already installed (brew version)"
     echo " - launch locate service"
+else
+    echo
+    echo " - WARNING - created for MAC OS, need to add the apt-get install for linux"
+    echo
 fi
 
 
@@ -30,7 +34,7 @@ if [ "$(uname)" == "$macstr" ]; then
         echo "install brew"
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
-    
+
     if [ $(which git) ]; then
         ret="${ret}\ngit already installed, ignore"
     else
@@ -68,7 +72,7 @@ if [ "$(uname)" == "$macstr" ]; then
     else
         echo "install reattach-to-user-namespace"
         brew install reattach-to-user-namespace
-    fi   
+    fi
     if [ $(which gvim) ]; then
         ret="${ret}\nmacvim(gvim) already installed, ignore"
     else
@@ -142,5 +146,7 @@ if [ "$(uname)" == "$macstr" ]; then
     echo "    ${cmd}"
     ${cmd}
 fi
+
+rm -f ~/.brewupdatedate
 
 printf "$ret\n"
