@@ -120,11 +120,11 @@ fi
 
 
 
-# Add customised functions/ scripts to bash
-# sources ~/bash_scripts).
-if [ -d ~/dotfiles/scripts ] && ! shopt -oq posix; then
-    . ~/dotfiles/scripts/*.sh
-fi
+## Add customised functions/ scripts to bash
+## sources ~/bash_scripts).
+#if [ -d ~/dotfiles/scripts ] && ! shopt -oq posix; then
+#    . ~/dotfiles/scripts/*.sh
+#fi
 
 #autostart a tmux session
 if [ "${TMUX}" == "" ]; then
@@ -150,17 +150,9 @@ export PATH="~/bin:$PATH"
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 
-# Time to update brew?
-oldDate=$(cat ~/.brewupdatedate 2>/dev/null||echo 0)
-currDate=$(date +%s)
-if [ ${currDate} -gt $((${oldDate}+86400)) ]; then
-    echo "time to try a brew update"
-    if [ "$(brew update | grep 'No changes to formulae.')" != "" ]; then
-        echo "Changes in some formulaes, upgrade"
-        brew upgrade
-    else
-        echo "No change, continue."
-    fi
-    echo ${currDate} > ~.brewupdatedate
+if [ -f ~/dotfiles/scripts/update_brew_packages.sh ]; then
+   ~/dotfiles/scripts/update_brew_packages.sh 
 fi
+
+
 
