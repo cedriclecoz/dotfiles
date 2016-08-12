@@ -120,11 +120,11 @@ fi
 
 
 
-## Add customised functions/ scripts to bash
-## sources ~/bash_scripts).
-#if [ -d ~/dotfiles/scripts ] && ! shopt -oq posix; then
-#    . ~/dotfiles/scripts/*.sh
-#fi
+# Add customised functions / scripts to bash
+# sources ~/bash_scripts).
+if [ -d ~/dotfiles/scripts ] && ! shopt -oq posix; then
+    . ~/dotfiles/scripts/*.sh
+fi
 
 #autostart a tmux session
 if [ "${TMUX}" == "" ]; then
