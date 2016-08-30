@@ -86,6 +86,40 @@ if [ "$(uname)" == "$macstr" ]; then
         brew install Caskroom/cask/karabiner
     fi
 fi
+if [ "$(uname)" == "Linux" ]; then
+
+    if [ $(which git) ]; then
+        ret="${ret}\ngit already installed, ignore"
+    else
+        echo "install git"
+        sudo apt-get install -y git
+    fi
+    tmp=$(bash --version | grep 'version 3\.')
+    if [ "$tmp" == "" ]; then
+        ret="${ret}\nbash at version $(bash --version), ignore"
+    else
+        echo "do something for bash ?"
+    fi
+    if [ -e /usr/local/bin/ctags ]; then
+        ret="${ret}\nctags already installed, ignore"
+    else
+        echo "do something for ctags ?"
+    fi
+    if [ $(which tmux) ]; then
+        ret="${ret}\ngit already installed, ignore"
+    else
+        echo "install tmux"
+        sudo apt-get install -y tmux
+    fi
+    if [ $(which gvim) ]; then
+        ret="${ret}\ngvim already installed, ignore"
+    else
+        echo "install vim"
+        sudo apt-get install vim
+    fi
+fi
+
+
 if [ ! -e ~/dotfiles ]; then
     echo "Current folder not in ${HOME}, create symbolic link"
     ln -sf ${CUR_FOLDER} ~/dotfiles
