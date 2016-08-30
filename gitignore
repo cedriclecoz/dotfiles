@@ -28,4 +28,5 @@ bak.*
 vim/vim/
 vim/vim/bundle
 pyenv
+*.vmdk
 

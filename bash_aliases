@@ -14,6 +14,18 @@ a givm='gvim '
 a xls='open -a "Microsoft Excel" '
 a doc='open -a "Microsoft Word" '
 
+# Kill all running containers.
+a dockerkillall='docker kill $(docker ps -q)'
+
+# Delete all stopped containers.
+a dockercleanc='printf "\n>>> Deleting stopped containers\n\n" && docker rm $(docker ps -a -q)'
+
+# Delete all untagged images.
+a dockercleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
+
+# Delete all stopped containers and untagged images.
+a dockerclean='dockercleanc || true && dockercleani'
+
 function mktags {
     ~/.bash_scripts/mktags.sh $@&
 }
