@@ -1,8 +1,17 @@
 #!/bin/bash
 
 CUR_FOLDER=$(pwd)
+
 macstr="Darwin"
+linuxstr="Linux"
 ret=
+
+cat .git/config | grep dotfiles.git  > /dev/null
+if [ "$?" != "0" ]; then
+    echo "Please launch $0 from the dotfile git folder root"
+    exit -1
+fi
+
 echo "WARNING deploy script will:"
 echo " - create the following symbolic links in ${HOME}  (existing links won't be overwritten):"
 echo "    dotfiles"
@@ -27,7 +36,7 @@ fi
 read -n1 -r -p "Press a key to continue..." key
 
 
-if [ "$(uname)" == "$macstr" ]; then
+if [ "$(uname)" == "${macstr}" ]; then
     if [ $(which brew) ]; then
         ret="${ret}\nbrew already installed, ignore"
     else
@@ -86,7 +95,7 @@ if [ "$(uname)" == "$macstr" ]; then
         brew install Caskroom/cask/karabiner
     fi
 fi
-if [ "$(uname)" == "Linux" ]; then
+if [ "$(uname)" == "${linuxstr}" ]; then
 
     if [ $(which git) ]; then
         ret="${ret}\ngit already installed, ignore"
@@ -117,6 +126,8 @@ if [ "$(uname)" == "Linux" ]; then
         echo "install vim"
         sudo apt-get install vim
     fi
+
+    sed -i.bak s/"set -g default-command"/"#set -g default-command"/g tmux.conf
 fi
 
 
