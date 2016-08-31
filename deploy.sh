@@ -124,7 +124,7 @@ if [ "$(uname)" == "${linuxstr}" ]; then
         ret="${ret}\ngvim already installed, ignore"
     else
         echo "install vim"
-        sudo apt-get install vim
+        sudo apt-get install -y vim-gnome
     fi
 
     sed -i.bak s/"set -g default-command"/"#set -g default-command"/g tmux.conf

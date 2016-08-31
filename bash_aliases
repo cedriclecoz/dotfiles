@@ -1,7 +1,13 @@
 
+macstr="Darwin"
+
 alias a="alias "
 
-a ls='ls -G'
+if [ "$(uname)" == "$macstr" ]; then
+    a ls='ls -G'
+else
+    a ls='ls -G --color=auto'
+fi
 a l='ls -la'
 a lp='ls -lart'
 a p='cd ..'
@@ -30,7 +36,6 @@ function mktags {
     ~/.bash_scripts/mktags.sh $@&
 }
 
-macstr="Darwin"
 tmux_bin=
 if [ "$(uname)" == "$macstr" ]; then
     tmux_bin="/usr/local/bin/tmux"
@@ -259,5 +264,4 @@ fi)'
 if [ -e ~/.project_aliases ]; then
     source ~/.project_aliases
 fi
-
 
