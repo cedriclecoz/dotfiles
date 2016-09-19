@@ -133,7 +133,7 @@ fi
 #source tmux config file
 if [ "${TMUX}" != "" ]; then
    if [ -e ~/dotfiles/tmux.conf ]; then
-       tmux source-file ~/dotfiles/tmux.conf
+       tmux -q source-file ~/dotfiles/tmux.conf
    fi
 fi
 
