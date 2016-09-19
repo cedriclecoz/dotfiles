@@ -128,7 +128,7 @@ fi
 
 #autostart a tmux session
 if [ "${TMUX}" == "" ]; then
-   tmux
+   tmux -q
 fi
 #source tmux config file
 if [ "${TMUX}" != "" ]; then
