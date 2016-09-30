@@ -126,15 +126,20 @@ if [ -d ~/dotfiles/scripts ] && ! shopt -oq posix; then
     . ~/dotfiles/scripts/*.sh
 fi
 
-#autostart a tmux session
-if [ "${TMUX}" == "" ]; then
-   tmux -q
-fi
-#source tmux config file
-if [ "${TMUX}" != "" ]; then
-   if [ -e ~/dotfiles/tmux.conf ]; then
-       tmux -q source-file ~/dotfiles/tmux.conf
-   fi
+
+tmp=$(env| grep "SSH_CLIENT=")
+
+if [ "${tmp}" == "" ]; then
+    #autostart a tmux session
+    if [ "${TMUX}" == "" ]; then
+       tmux -q
+    fi
+    #source tmux config file
+    if [ "${TMUX}" != "" ]; then
+       if [ -e ~/dotfiles/tmux.conf ]; then
+           tmux -q source-file ~/dotfiles/tmux.conf
+       fi
+    fi
 fi
 
 export GVIM_TAGS="CSCOPE_CTAGS"
