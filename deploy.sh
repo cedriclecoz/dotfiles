@@ -113,6 +113,10 @@ if [ "$(uname)" == "${linuxstr}" ]; then
         ret="${ret}\nctags already installed, ignore"
     else
         echo "do something for ctags ?"
+        sudo apt-get install exuberant-ctags
+        if [ -e /usr/bin/ctags ]; then
+            sudo ln -s /usr/bin/ctags /usr/local/bin/ctags
+        fi
     fi
     if [ $(which tmux) ]; then
         ret="${ret}\ngit already installed, ignore"
