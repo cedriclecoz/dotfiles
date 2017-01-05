@@ -128,6 +128,10 @@ if [ "$(uname)" == "${linuxstr}" ]; then
     fi
 
     sed -i.bak s/"set -g default-command"/"#set -g default-command"/g tmux.conf
+
+    echo 'Installing build essentials and other packages.'
+    sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
 fi
 
 
@@ -172,7 +176,7 @@ fi
 mkdir -p ${CUR_FOLDER}/vim/vim/bundle
 if [ ! -e ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim ]; then
     echo "clone neobundle.vim"
-    git clone git://github.com/Shougo/neobundle.vim.git ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim
+    git clone https://github.com/Shougo/neobundle.vim.git ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim
 else
     ret="${ret}\nneobundle.vim already exist, ignore"
 fi
