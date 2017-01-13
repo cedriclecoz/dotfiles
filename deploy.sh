@@ -145,7 +145,8 @@ else
 fi
 if [ ! -e ~/.vim ]; then
     echo 'deploy vim/'
-    ln -sf ${CUR_FOLDER}/vim/vim ~/.vim
+    mkdir -p ${CUR_FOLDER}/vim/vim
+    ln -sf ${CUR_FOLDER}/vim/vim/ ~/.vim
 else
     ret="${ret}\n~/.vim already exist, ignore"
 fi
