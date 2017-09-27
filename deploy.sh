@@ -192,6 +192,10 @@ if [ "$(uname)" == "$macstr" ]; then
     ${cmd}
 fi
 
+#see http://caiustheory.com/git-git-git-git-git/
+#ignore multiple git :)
+git config --global alias.git '!exec git'
+
 rm -f ~/.brewupdatedate
 
 printf "$ret\n"
