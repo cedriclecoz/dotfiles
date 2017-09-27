@@ -113,6 +113,10 @@ if [ "$(uname)" == "${linuxstr}" ]; then
         ret="${ret}\nctags already installed, ignore"
     else
         echo "do something for ctags ?"
+        sudo apt-get install exuberant-ctags
+        if [ -e /usr/bin/ctags ]; then
+            sudo ln -s /usr/bin/ctags /usr/local/bin/ctags
+        fi
     fi
     if [ $(which tmux) ]; then
         ret="${ret}\ngit already installed, ignore"
@@ -128,6 +132,10 @@ if [ "$(uname)" == "${linuxstr}" ]; then
     fi
 
     sed -i.bak s/"set -g default-command"/"#set -g default-command"/g tmux.conf
+
+    echo 'Installing build essentials and other packages.'
+    sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
 fi
 
 
@@ -145,7 +153,8 @@ else
 fi
 if [ ! -e ~/.vim ]; then
     echo 'deploy vim/'
-    ln -sf ${CUR_FOLDER}/vim/vim ~/.vim
+    mkdir -p ${CUR_FOLDER}/vim/vim
+    ln -sf ${CUR_FOLDER}/vim/vim/ ~/.vim
 else
     ret="${ret}\n~/.vim already exist, ignore"
 fi
@@ -172,7 +181,7 @@ fi
 mkdir -p ${CUR_FOLDER}/vim/vim/bundle
 if [ ! -e ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim ]; then
     echo "clone neobundle.vim"
-    git clone git://github.com/Shougo/neobundle.vim.git ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim
+    git clone https://github.com/Shougo/neobundle.vim.git ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim
 else
     ret="${ret}\nneobundle.vim already exist, ignore"
 fi
