@@ -69,7 +69,7 @@ function! Show_80col_trailingWhiteSpace()
         echo 'Hiding 80 column + Trailing White Spaces'
     else
         :set colorcolumn=80
-        match ExtraWhitespace /\s\+$/
+        match ExtraWhitespace /\s\+$\|\t/
         echo 'Showing 80 columns + Trailing White Spaces'
     endif
 endfunction
