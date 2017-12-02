@@ -6,7 +6,7 @@ macstr="Darwin"
 linuxstr="Linux"
 ret=
 
-cat .git/config | grep -i "sirzic/dotfiles" > /dev/null
+cat .git/config | grep -i "/dotfiles" > /dev/null
 if [ "$?" != "0" ]; then
     echo "Please launch $0 from the dotfile git folder root"
     exit -1
