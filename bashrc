@@ -14,8 +14,8 @@ shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=10000
-HISTFILESIZE=2000
-
+HISTFILESIZE=10000
+PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.historylogs/bash-history-$(date "+%Y-%m-%d").log; fi'
 
 
 
@@ -114,9 +114,9 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
+#if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
+#	  . `brew --prefix`/etc/bash_completion.d/git-completion.bash
+#fi
 
 
 
@@ -127,20 +127,20 @@ if [ -d ~/dotfiles/scripts ] && ! shopt -oq posix; then
 fi
 
 
-tmp=$(env| grep "SSH_CLIENT=")
-
-if [ "${tmp}" == "" ]; then
-    #autostart a tmux session
-    if [ "${TMUX}" == "" ]; then
-       tmux -q
-    fi
-    #source tmux config file
-    if [ "${TMUX}" != "" ]; then
-       if [ -e ~/dotfiles/tmux.conf ]; then
-           tmux -q source-file ~/dotfiles/tmux.conf
-       fi
-    fi
-fi
+#tmp=$(env| grep "SSH_CLIENT=")
+#
+#if [ "${tmp}" == "" ]; then
+#    #autostart a tmux session
+#    if [ "${TMUX}" == "" ]; then
+#       tmux -q
+#    fi
+#    #source tmux config file
+#    if [ "${TMUX}" != "" ]; then
+#       if [ -e ~/dotfiles/tmux.conf ]; then
+#           tmux -q source-file ~/dotfiles/tmux.conf
+#       fi
+#    fi
+#fi
 
 export GVIM_TAGS="CSCOPE_CTAGS"
 
@@ -154,10 +154,14 @@ export PATH="~/bin:$PATH"
 
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 if [ -f ~/dotfiles/scripts/update_brew_packages.sh ]; then
    ~/dotfiles/scripts/update_brew_packages.sh 
 fi
 
+if [ -f ~/.iterm2_shell_integration.bash ]; then
+   source ~/.iterm2_shell_integration.bash 
+fi
 
 

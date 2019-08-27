@@ -37,63 +37,63 @@ read -n1 -r -p "Press a key to continue..." key
 
 
 if [ "$(uname)" == "${macstr}" ]; then
-    if [ $(which brew) ]; then
-        ret="${ret}\nbrew already installed, ignore"
-    else
-        echo "install brew"
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
-
-    if [ $(which git) ]; then
-        ret="${ret}\ngit already installed, ignore"
-    else
-        echo "install git"
-        brew install git
-    fi
-    tmp=$(bash --version | grep 'version 3\.')
-    if [ "$tmp" == "" ]; then
-        ret="${ret}\nbash at version $(bash --version), ignore"
-    else
-        echo "install bash (brew version)"
-        brew install bash
-        ret="${ret}\n!!!! bash installed, version: $(bash --version)"
-    fi
+#    if [ $(which brew) ]; then
+#        ret="${ret}\nbrew already installed, ignore"
+#    else
+#        echo "install brew"
+#        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#    fi
+#
+#    if [ $(which git) ]; then
+#        ret="${ret}\ngit already installed, ignore"
+#    else
+#        echo "install git"
+#        brew install git
+#    fi
+#    tmp=$(bash --version | grep 'version 3\.')
+#    if [ "$tmp" == "" ]; then
+#        ret="${ret}\nbash at version $(bash --version), ignore"
+#    else
+#        echo "install bash (brew version)"
+#        brew install bash
+#        ret="${ret}\n!!!! bash installed, version: $(bash --version)"
+#    fi
     if [ -e /usr/local/bin/ctags ]; then
         ret="${ret}\ngit already installed, ignore"
     else
         echo "install ctags"
         brew install ctags
     fi
-    if [ ! -e /Applications/iTerm.app ]; then
-        echo "install iTerm2"
-        brew install Caskroom/cask/iterm2
-    else
-        ret="${ret}\niTerm2 already exist, ignore"
-    fi
-    if [ $(which tmux) ]; then
-        ret="${ret}\ngit already installed, ignore"
-    else
-        echo "install tmux"
-        brew install tmux
-    fi
-     if [ ! -e /usr/local/bin/reattach-to-user-namespace ]; then
-        ret="${ret}\reattach-to-user-namespace already installed, ignore"
-    else
-        echo "install reattach-to-user-namespace"
-        brew install reattach-to-user-namespace
-    fi
+#    if [ ! -e /Applications/iTerm.app ]; then
+#        echo "install iTerm2"
+#        brew install Caskroom/cask/iterm2
+#    else
+#        ret="${ret}\niTerm2 already exist, ignore"
+#    fi
+#    if [ $(which tmux) ]; then
+#        ret="${ret}\ngit already installed, ignore"
+#    else
+#        echo "install tmux"
+#        brew install tmux
+#    fi
+#     if [ ! -e /usr/local/bin/reattach-to-user-namespace ]; then
+#        ret="${ret}\reattach-to-user-namespace already installed, ignore"
+#    else
+#        echo "install reattach-to-user-namespace"
+#        brew install reattach-to-user-namespace
+#    fi
     if [ $(which gvim) ]; then
         ret="${ret}\nmacvim(gvim) already installed, ignore"
     else
         echo "install macvim"
         brew install macvim
     fi
-    if [ -e /Applications/Karabiner.app ]; then
-        ret="${ret}\nkarabiner already installed, ignore"
-    else
-        echo "install karabiner"
-        brew install Caskroom/cask/karabiner
-    fi
+#    if [ -e /Applications/Karabiner.app ]; then
+#        ret="${ret}\nkarabiner already installed, ignore"
+#    else
+#        echo "install karabiner"
+#        brew install Caskroom/cask/karabiner
+#    fi
 fi
 if [ "$(uname)" == "${linuxstr}" ]; then
 
@@ -178,13 +178,6 @@ else
     ret="${ret}\n    maybe check if ./gitignore and ~/.gitignore can be merged, and a symbolic link created"
 fi
 
-mkdir -p ${CUR_FOLDER}/vim/vim/bundle
-if [ ! -e ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim ]; then
-    echo "clone neobundle.vim"
-    git clone https://github.com/Shougo/neobundle.vim.git ${CUR_FOLDER}/vim/vim/bundle/neobundle.vim
-else
-    ret="${ret}\nneobundle.vim already exist, ignore"
-fi
 
 if [ ! -e pyenv ]; then
     echo "clone pyenv"

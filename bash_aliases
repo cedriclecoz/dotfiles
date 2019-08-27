@@ -112,6 +112,11 @@ function gvig {
    gvim $vi_file +$vi_line;
 }
 
+function sshdel {
+    echo "Delete line $1 from ~/.ssh/known_hosts"
+    sed -i'' -e "${1}d" ~/.ssh/known_hosts
+}
+
 # ------------------
 # git----------
 # ------------------
