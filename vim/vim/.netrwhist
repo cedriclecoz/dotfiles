@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/Users/cedric.le.coz/work/rdk/cmf_smoke-test/broadband/emulators'
+let g:netrw_dirhist_9='/Users/cedric.le.coz/work/rdk/codecommit/puppet/puppet/environments/production/manifests'
+let g:netrw_dirhist_8='/Users/cedric.le.coz/work/rdk/codecommit/puppet/puppet/environments/production'
+let g:netrw_dirhist_7='/Users/cedric.le.coz/work/rdk/codecommit/puppet/puppet/environments/production/modules'
+let g:netrw_dirhist_6='/Users/cedric.le.coz/work/rdk/codecommit/puppet/puppet/environments/production/modules/site'
+let g:netrw_dirhist_5='/Users/cedric.le.coz/work/rdk/codecommit/puppet/puppet/environments/production/modules/site/manifests'
+let g:netrw_dirhist_4='/Users/cedric.le.coz/work/rdk/codecommit/puppet/puppet/environments/production/modules/site/manifests/services'
+let g:netrw_dirhist_3='/Users/cedric.le.coz/work/rdk/codecommit/lambda/lambda-github-trigger/src'
+let g:netrw_dirhist_2='/Users/cedric.le.coz/work/rdk/codecommit/lambda/lambda-github-trigger'
+let g:netrw_dirhist_1='/Users/cedric.le.coz/work/rdk/codecommit/lambda/lambda-github-trigger/tests'
