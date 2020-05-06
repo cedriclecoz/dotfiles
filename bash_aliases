@@ -112,9 +112,32 @@ function gvig {
    gvim $vi_file +$vi_line;
 }
 
+function valid_ip()
+{
+    local  ip=$1
+    local  stat=1
+
+    if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        OIFS=$IFS
+        IFS='.'
+        ip=($ip)
+        IFS=$OIFS
+        [[ ${ip[0]} -le 255 && ${ip[1]} -le 255 \
+            && ${ip[2]} -le 255 && ${ip[3]} -le 255 ]]
+        stat=$?
+    fi
+    return $stat
+}
+
 function sshdel {
-    echo "Delete line $1 from ~/.ssh/known_hosts"
-    sed -i'' -e "${1}d" ~/.ssh/known_hosts
+    echo "Delete entries $1 from ~/.ssh/known_hosts"
+    sed -i '' "/${1}/d" ~/.ssh/known_hosts
+    valid_ip $1
+    if [ $? != 0 ]; then
+      ipadd=$(ping -c 1 -t 1 build-yocto-persistent-alanr | grep PING | sed 's/.*(//' | sed 's/).*//')
+      echo "Removing ip address $ipadd"
+      sed -i '' "/${ipadd}/d" ~/.ssh/known_hosts
+    fi
 }
 
 # ------------------
