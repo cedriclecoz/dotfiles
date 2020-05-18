@@ -107,8 +107,8 @@ alias l='ls -CF'
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/dotfiles/bash_aliases ]; then
-    . ~/dotfiles/bash_aliases
+if [ -f ~/dotfiles/rcfiles/aliases ]; then
+    . ~/dotfiles/rcfiles/aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -152,9 +152,16 @@ PERL_MM_OPT="INSTALL_BASE=/home/cedricl/perl5"; export PERL_MM_OPT;
 export PATH="/usr/local/bin:$PATH"
 export PATH="~/bin:$PATH"
 
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+if [ -f ~/dotfiles/rcfiles/pyenvrc ]; then
+    . ~/dotfiles/rcfiles/pyenvrc
+fi
+if [ -f ~/dotfiles/rcfiles/rbenvrc ]; then
+    . ~/dotfiles/rcfiles/rbenvrc
+fi
 
 if [ -f ~/dotfiles/scripts/update_brew_packages.sh ]; then
    ~/dotfiles/scripts/update_brew_packages.sh 
@@ -164,4 +171,8 @@ if [ -f ~/.iterm2_shell_integration.bash ]; then
    source ~/.iterm2_shell_integration.bash 
 fi
 
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+export PATH=$JAVA_HOME/bin:$PATH
 
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

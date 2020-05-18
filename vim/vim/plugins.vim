@@ -8,6 +8,7 @@ Plug 'https://github.com/majutsushi/tagbar'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'chrisbra/Colorizer'
 Plug 'powerman/vim-plugin-AnsiEsc'
+Plug 'vim-scripts/multisearch.vim'
 
 call plug#end()
 

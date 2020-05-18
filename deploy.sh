@@ -147,9 +147,15 @@ else
 fi
 if [ ! -e ~/.bashrc ]; then
     echo 'deploy bashrc'
-    ln -sf ${CUR_FOLDER}/bashrc ~/.bashrc
+    ln -sf ${CUR_FOLDER}/rcfiles/bashrc ~/.bashrc
 else
     ret="${ret}\n~/.bashrc already exist, ignore"
+fi
+if [ ! -e ~/.zshrc ]; then
+    echo 'deploy zshrc'
+    ln -sf ${CUR_FOLDER}/rcfiles/zshrc ~/.zshrc
+else
+    ret="${ret}\n~/.zshrc already exist, ignore"
 fi
 if [ ! -e ~/.vim ]; then
     echo 'deploy vim/'
@@ -166,7 +172,7 @@ else
 fi
 if [ ! -e ~/.inputrc ]; then
     echo 'deploy inputrc'
-    ln -sf ${CUR_FOLDER}/inputrc ~/.inputrc
+    ln -sf ${CUR_FOLDER}/rcfiles/inputrc ~/.inputrc
 else
     ret="${ret}\n~/.inputrc already exist, ignore"
 fi
@@ -185,6 +191,12 @@ if [ ! -e pyenv ]; then
     ln -sf ${CUR_FOLDER}/pyenv ~/.pyenv
 else
     ret="${ret}\npyenv already present, ignore"
+fi
+
+if [ ! -e rbenv ]; then
+    echo "clone rbenv"
+    git clone https://github.com/rbenv/rbenv.git
+    ln -sf ${CUR_FOLDER}/rbenv ~/.rbenv
 fi
 
 if [ "$(uname)" == "$macstr" ]; then
