@@ -151,6 +151,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/cedricl/perl5"; export PERL_MM_OPT;
 
 export PATH="/usr/local/bin:$PATH"
 export PATH="~/bin:$PATH"
+export PATH=$(brew --prefix openvpn)/sbin:$PATH
 
 
 export PATH="$HOME/.rbenv/bin:$PATH"

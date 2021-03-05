@@ -9,6 +9,7 @@ if [ $(which brew) ]; then
     if [ ${currDate} -gt $((${oldDate}+86399)) ]; then
         if [ "$(brew update | grep 'No changes to formulae.')" != "" ]; then
             echo "Changes in some formulaes, upgrade"
+            brew update
             brew upgrade
         fi
         echo ${currDate} > ${STAMPFILE}

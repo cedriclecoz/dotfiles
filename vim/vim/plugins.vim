@@ -9,6 +9,7 @@ Plug 'fholgado/minibufexpl.vim'
 Plug 'chrisbra/Colorizer'
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'vim-scripts/multisearch.vim'
+Plug 'rodjek/vim-puppet'
 
 call plug#end()
 

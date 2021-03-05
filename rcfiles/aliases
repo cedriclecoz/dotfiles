@@ -134,10 +134,14 @@ function sshdel {
     sed -i '' "/${1}/d" ~/.ssh/known_hosts
     valid_ip $1
     if [ $? != 0 ]; then
-      ipadd=$(ping -c 1 -t 1 build-yocto-persistent-alanr | grep PING | sed 's/.*(//' | sed 's/).*//')
+      ipadd=$(ping -c 1 -t 1 $1 | grep PING | sed 's/.*(//' | sed 's/).*//')
       echo "Removing ip address $ipadd"
       sed -i '' "/${ipadd}/d" ~/.ssh/known_hosts
     fi
+}
+function sshdelssh {
+    sshdel $@
+    ssh -o "StrictHostKeyChecking=no" $@
 }
 
 # ------------------

@@ -1,3 +1,4 @@
+tmpclc/**
 *logdir*
 *.pyc
 *.project
@@ -27,4 +28,4 @@ bak.*
 *.m4
 pyenv
 *.vmdk
-
+.netrwhist
