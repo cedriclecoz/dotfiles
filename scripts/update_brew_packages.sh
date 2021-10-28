@@ -7,12 +7,14 @@ if [ $(which brew) ]; then
     oldDate=$(cat ${STAMPFILE} 2>/dev/null||echo 0)
     currDate=$(date +%s)
     if [ ${currDate} -gt $((${oldDate}+86399)) ]; then
-        if [ "$(brew update | grep 'No changes to formulae.')" != "" ]; then
-            echo "Changes in some formulaes, upgrade"
-            brew update
-            brew upgrade
+        screen -ls | grep brewupdategrade
+        if [ $? != 0 ]; then
+            echo "starting brew update upgrade in screen brewupdategrade"
+            screen -dmSL brewupdategrade bash -c 'echo ""; echo ""; date; brew update; brew upgrade'
+            echo ${currDate} > ${STAMPFILE}
+        else
+            echo "A screen brewupdategrade is alreaddy in progress.. skip."
         fi
-        echo ${currDate} > ${STAMPFILE}
     fi
 else
     exit 
