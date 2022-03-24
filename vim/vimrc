@@ -41,15 +41,7 @@ endfunction
 
 function! Save_and_launch()
     execute "w"
-    if &filetype == "python"
-        execute '!python' shellescape(@%, 1)
-    elseif &filetype == "sh"
-        execute '!sh' shellescape(@%, 1)
-    elseif &filetype == "perl"
-        execute '!perl' shellescape(@%, 1)
-    else
-        echo "File type not set in ~/.bashrc... unable to execute." 
-    endif
+    execute "!./%"
 endfunction
 
 
