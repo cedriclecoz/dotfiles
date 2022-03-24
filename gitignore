@@ -30,3 +30,4 @@ pyenv
 *.vmdk
 .netrwhist
 .python-version
+.ruby-version
