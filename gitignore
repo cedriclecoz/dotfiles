@@ -31,3 +31,6 @@ pyenv
 .netrwhist
 .python-version
 .ruby-version
+vim/vim/.netrwhist
+vim/vim/plugged/taglist.vim
+.gitignore
