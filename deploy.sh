@@ -142,6 +142,7 @@ fi
 
 wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O /tmp/ohmyzsh_install.sh
 sh /tmp/ohmyzsh_install.sh --unattended
+ln -s ${HOME}/dotfiles/omzsh/themes/cedric.zsh-theme ${HOME}/.oh-my-zsh/themes/cedric.zsh-theme
 
 if [ ! -e ~/dotfiles ]; then
     echo "Current folder not in ${HOME}, create symbolic link"
