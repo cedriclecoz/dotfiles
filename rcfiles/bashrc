@@ -110,6 +110,10 @@ alias l='ls -CF'
 if [ -f ~/dotfiles/rcfiles/aliases ]; then
     . ~/dotfiles/rcfiles/aliases
 fi
+if [ -f ~/dotfiles/rcfiles/promptrc_bash ]; then
+    . ~/dotfiles/rcfiles/promptrc_bash
+fi
+
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -150,7 +154,7 @@ PERL_MB_OPT="--install_base \"/home/cedricl/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/cedricl/perl5"; export PERL_MM_OPT;
 
 export PATH="/usr/local/bin:$PATH"
-export PATH="~/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 export PATH=$(brew --prefix openvpn)/sbin:$PATH
 
 

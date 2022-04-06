@@ -16,6 +16,7 @@ echo "WARNING deploy script will:"
 echo " - create the following symbolic links in ${HOME}  (existing links won't be overwritten):"
 echo "    dotfiles"
 echo "    .bashrc"
+echo "    .zshrc"
 echo "    .vim"
 echo "    .vimrc"
 echo "    .inputrc"
@@ -138,6 +139,9 @@ if [ "$(uname)" == "${linuxstr}" ]; then
 libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
 fi
 
+
+wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O /tmp/ohmyzsh_install.sh
+sh /tmp/ohmyzsh_install.sh --unattended
 
 if [ ! -e ~/dotfiles ]; then
     echo "Current folder not in ${HOME}, create symbolic link"
