@@ -1,0 +1,35 @@
+
+#if [[ "$(uname)" == "$macstr" ]]; then
+#    source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
+#    source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+#    GIT_PS1_SHOWDIRTYSTATE=true
+#fi
+
+# untracked files present
+export PS1=$IBlack$Date" "$Time12h" "$Hostname$Color_Off'$(git branch &>/dev/null;\
+if [ $? -eq 0 ]; then \
+  echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
+  if [ "$?" -eq "0" ]; then \
+    # @4 - Clean repository - nothing to commit
+    if [[ "`whoami`" == "root" ]]; then \
+        echo "'$Red' ROOT'$Green'"$(__git_ps1 " (%s)"); \
+    else \
+        echo " '$Green'"$(__git_ps1 " (%s)"); \
+    fi; \
+  else \
+    # @5 - Changes to working tree
+    if [[ "`whoami`" == "root" ]]; then \
+        echo "'$Red' ROOT'$IRed'"$(__git_ps1 " {%s}"); \
+    else \
+        echo " '$IRed'"$(__git_ps1 " {%s}"); \
+    fi;\
+  fi) '$BYellow$PathFull$Color_Off'> "; \
+else \
+  # @2 - Prompt when not in GIT repo
+  if [[ "`whoami`" == "root" ]]; then \
+    echo "'$Red' ROOT '$Yellow$PathFull$Color_Off'> "; \
+  else \
+    echo " '$Yellow$PathFull$Color_Off'> "; \
+  fi;\
+fi)'
+
