@@ -1,9 +1,9 @@
 
-#if [[ "$(uname)" == "$macstr" ]]; then
-#    source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
-#    source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
-#    GIT_PS1_SHOWDIRTYSTATE=true
-#fi
+if [[ "$(uname)" == "$macstr" ]]; then
+    source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
+    source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+    GIT_PS1_SHOWDIRTYSTATE=true
+fi
 
 # untracked files present
 export PS1=$IBlack$Date" "$Time12h" "$Hostname$Color_Off'$(git branch &>/dev/null;\

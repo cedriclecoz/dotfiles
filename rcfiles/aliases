@@ -144,6 +144,9 @@ function sshdelssh {
     ssh -o "StrictHostKeyChecking=no" $@
 }
 
+#needed in zsh to use wildards.. ie.. scp xxx:~/toto* .
+alias scp='noglob scp'
+
 # ------------------
 # git----------
 # ------------------

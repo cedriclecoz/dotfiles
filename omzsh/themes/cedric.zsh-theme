@@ -1,8 +1,8 @@
 
 
 CEDRIC_BRACKET_COLOR="%{$fg[white]%}"
-CEDRIC_TIME_COLOR="%{$fg[yellow]%}"
-CEDRIC_DIR_COLOR="%{$fg[cyan]%}"
+CEDRIC_TIME_COLOR="%{$fg[247]%}"
+CEDRIC_DIR_COLOR="%{$fg[yellow]%}"
 CEDRIC_GOOD_COLOR="%{$fg[green]%}"
 CEDRIC_BAD_COLOR="%{$fg[red]%}"
 
@@ -15,9 +15,9 @@ function cedric_git_prompt(){
   GITSTATUS=$(git status --porcelain 2> /dev/null)
   GITBRANCH=$(git_current_branch)
   if [[ -n $GITSTATUS ]]; then
-     echo "${CEDRIC_BRACKET_COLOR}:${CEDRIC_BAD_COLOR}(${GITBRANCH})"
+     echo "${CEDRIC_BAD_COLOR}{${GITBRANCH}} "
   else
-     echo "${CEDRIC_BRACKET_COLOR}:${CEDRIC_GOOD_COLOR}(${GITBRANCH})"
+     echo "${CEDRIC_GOOD_COLOR}(${GITBRANCH}) "
   fi
 }
 
@@ -36,10 +36,10 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY=""
 
 # Our elements:
-CEDRIC_TIME="${CEDRIC_BRACKET_COLOR}[${CEDRIC_TIME_COLOR}%D{%H:%M:%S}${CEDRIC_BRACKET_COLOR}] %{$reset_color%}"
+CEDRIC_TIME="${CEDRIC_TIME_COLOR}%D{%m.%d %H:%M:%S} %{$reset_color%}"
 CEDRIC_DIR="${CEDRIC_DIR_COLOR}%~"
-CEDRIC_PROMPT="${CEDRIC_BRACKET_COLOR} ➭ "
+CEDRIC_PROMPT="${CEDRIC_BRACKET_COLOR}> "
 
 # Put it all together!
-PROMPT=$'\n${CEDRIC_TIME}${CEDRIC_DIR}\$(cedric_git_prompt)\$(cedric_root_prompt)${CEDRIC_PROMPT}%{$reset_color%}'
+PROMPT=$'\n${CEDRIC_TIME}%m \$(cedric_git_prompt)${CEDRIC_DIR}\$(cedric_root_prompt)${CEDRIC_PROMPT}%{$reset_color%}'
 
