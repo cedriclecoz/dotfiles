@@ -197,6 +197,12 @@ if [ ! -e pyenv ]; then
 else
     ret="${ret}\npyenv already present, ignore"
 fi
+if [ ! -e pyenv/plugins/pyenv-virtualenv ]; then
+    echo "clone pyenv-virtualenv"
+    git clone https://github.com/yyuu/pyenv.git pyenv/plugins/pyenv-virtualenv
+else
+    ret="${ret}\npyenv/plugins/virtualenv already present, ignore"
+fi
 
 if [ ! -e rbenv ]; then
     echo "clone rbenv"
