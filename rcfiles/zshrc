@@ -101,7 +101,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.historylogs/zsh-history-$(date "+%Y-%m-%d").log; fi'
+#save history
+precmd() { if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history -1)" >> ~/.historylogs/zsh-history-$(date "+%Y-%m-%d").log; fi }
 
 
 # # enable color support of ls and also add handy aliases
@@ -146,6 +147,10 @@ fi
 
 if [ -f ~/dotfiles/scripts/update_brew_packages.sh ]; then
    ~/dotfiles/scripts/update_brew_packages.sh
+fi
+
+if [ -f ~/.iterm2_shell_integration.zsh ]; then
+   source ~/.iterm2_shell_integration.zsh 
 fi
 
 #export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
