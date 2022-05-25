@@ -188,7 +188,12 @@ else
     ret="${ret}\n~/.gitignore already exist, ignore"
     ret="${ret}\n    maybe check if ./gitignore and ~/.gitignore can be merged, and a symbolic link created"
 fi
-
+if [ ! -e ~/.pyenvrc ]; then
+    echo 'deploy pyenvrc'
+    ln -sf ${CUR_FOLDER}/rcfiles/pyenvrc ~/.pyenvrc
+else
+    ret="${ret}\n~/.pyenvrc already exist, ignore"
+fi
 
 if [ ! -e pyenv ]; then
     echo "clone pyenv"
