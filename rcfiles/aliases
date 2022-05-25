@@ -133,7 +133,8 @@ function sshdel {
     fi
 }
 function sshdelssh {
-    sshdel $@
+    #pass on the last param as before might be ssh key or other
+    sshdel ${@: -1}
     ssh -o "StrictHostKeyChecking=no" $@
 }
 
