@@ -103,6 +103,9 @@ source $ZSH/oh-my-zsh.sh
 
 #save history
 precmd() { if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history -1)" >> ~/.historylogs/zsh-history-$(date "+%Y-%m-%d").log; fi }
+#do not share history between terminals.
+setopt no_share_history
+unsetopt share_history
 
 
 # # enable color support of ls and also add handy aliases
@@ -128,6 +131,10 @@ fi
 
 if [ -d ~/dotfiles/scripts ]; then
     . ~/dotfiles/scripts/*.sh
+fi
+
+if [ -f ~/.project_aliases ]; then  #Used for aliases which should not be posted on github (dotfiles)
+    . ~/.project_aliases
 fi
 
 export PATH="/usr/local/bin:$PATH"
