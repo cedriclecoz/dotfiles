@@ -48,6 +48,7 @@ endfunction
 "Key mapping
   "map <F2> key to display the 80char margin
     map <F2>          :call Show_80col_trailingWhiteSpace()<CR>
+    nnoremap <F3> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
   "map <F4> key to display file Tree
     "map <F4>          :TlistToggle<CR>
     map <F4>          ::NERDTreeToggle<CR>
