@@ -35,5 +35,5 @@ vim/vim/.netrwhist
 vim/vim/plugged/taglist.vim
 .gitignore
 rbenv/
-vim/vim/autoload/plug.vim.old
+vim/vim/autoloadi/
 vim/vim/plugged/
