@@ -60,6 +60,11 @@ endfunction
     cmap W! execute 'silent w !sudo tee > /dev/null %' \| edit!
 
 
+augroup myTodo
+  autocmd!
+  autocmd Syntax * syntax match myTodo /\v\_.<(TODO|FIXME|ToDo).*/hs=s+1 containedin=.*Comment
+augroup END
 
+highlight link myTodo Todo
 
 
