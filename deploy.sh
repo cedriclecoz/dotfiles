@@ -5,7 +5,7 @@ set -e
 # keep track of the last executed command
 trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 # echo an error message before exiting
-trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
+trap 'echo "\"${last_command}\" command filed with exit code $?."' ERR
 CUR_FOLDER=$(pwd)
 
 macstr="Darwin"
@@ -45,6 +45,10 @@ read -n1 -r -p "Press a key to continue..." key
 mkdir -p ~/.historylogs
 
 if [ "$(uname)" == "${macstr}" ]; then
+    if [ ! -f /tmp/rosetta_installed ]; then
+        softwareupdate --install-rosetta
+        touch /tmp/rosetta_installed
+    fi
     if [ $(which brew) ]; then
         ret="${ret}\nbrew already installed, ignore"
     else
@@ -110,6 +114,14 @@ if [ "$(uname)" == "${macstr}" ]; then
 #        echo "install karabiner"
 #        brew install Caskroom/cask/karabiner
 #    fi
+    
+    if [ $(which aws) ]; then
+        ret="${ret}\naws already installed, ignore"
+    else
+        echo "install aws"
+        wget https://awscli.amazonaws.com/AWSCLIV2.pkg -O /tmp/awscliv2.pkg
+        sudo installer -pkg /tmp/awscliv2.pkg -target /
+    fi
 fi
 if [ "$(uname)" == "${linuxstr}" ]; then
 
@@ -226,6 +238,23 @@ if [ ! -e pyenv/plugins/pyenv-virtualenv ]; then
     git clone https://github.com/pyenv/pyenv-virtualenv.git pyenv/plugins/pyenv-virtualenv
 else
     ret="${ret}\npyenv/plugins/virtualenv already present, ignore"
+fi
+
+if [ ! -d pyenv/versions ] || [ "$(ls pyenv/versions/ | wc -l |tr -d '[:space:]')" == "0" ]; then
+    echo "Install a pyenv python"
+    source ~/.pyenvrc
+    pyenv install -l
+    read -p "Please enter version to install (will take a few min, press enter to skip): " PYENV_PROMPT
+    if [ -z $PYENV_PROMPT ]; then
+        echo "do not install a python version"
+        ret="${ret}\nSkip installation of a pyenv python"
+    else
+        echo "Installing ${PYENV_PROMPT}"
+        pyenv install ${PYENV_PROMPT}
+    fi
+else
+    ret="${ret}\na python already present in ~/.pyenv/versions/, ignore"
+    
 fi
 
 if [ ! -e rbenv ]; then
