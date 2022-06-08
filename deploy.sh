@@ -27,10 +27,19 @@ echo "    .vim"
 echo "    .vimrc"
 echo "    .inputrc"
 if [ "$(uname)" == "$macstr" ]; then
+    if [ "$(uname -m)" != "x86_64" ]; then
+        echo " - install rosetta (to allow running intel compiled apps)"
+    fi
     echo " - install brew if not already installed"
     echo " - install up-to-date bash if current version is 3.* (brew version)"
     echo " - install gvim if not already installed (brew version)"
     echo " - install iTerm2 if not already installed (brew version)"
+    echo " - install aws cli v2 if not already installed"
+    echo " - install pyenv"
+    echo " - install pyenv virtualenv"
+    echo " - install pyenv python"
+    echo " - install rbenv"
+
     #echo " - install ctags if not already installed (brew version)"
     echo " - launch locate service"
 else
@@ -45,7 +54,7 @@ read -n1 -r -p "Press a key to continue..." key
 mkdir -p ~/.historylogs
 
 if [ "$(uname)" == "${macstr}" ]; then
-    if [ ! -f /tmp/rosetta_installed ]; then
+    if [ "$(uname -m)" != "x86_64" ] && [ ! -f /tmp/rosetta_installed ]; then
         softwareupdate --install-rosetta
         touch /tmp/rosetta_installed
     fi
@@ -53,9 +62,16 @@ if [ "$(uname)" == "${macstr}" ]; then
         ret="${ret}\nbrew already installed, ignore"
     else
         echo "install brew"
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ${HOME}/.zprofile
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        if [ "$(uname -m)" != "x86_64" ]; then
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ${HOME}/.zprofile
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ${HOME}/.bash_profile
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        else
+            echo 'eval "$(/usr/local/Homebrew/bin/brew shellenv)"' >> ${HOME}/.zprofile
+            echo 'eval "$(/usr/local/Homebrew/brew shellenv)"' >> ${HOME}/.bash_profile
+            eval "$(/usr/local/Homebrew/bin/brew shellenv)"
+        fi
     fi
 
     if [ $(which git) ]; then
