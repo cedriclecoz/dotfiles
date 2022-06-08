@@ -25,7 +25,7 @@ if [ "$(uname)" == "$macstr" ]; then
     echo " - install up-to-date bash if current version is 3.* (brew version)"
     echo " - install gvim if not already installed (brew version)"
     echo " - install iTerm2 if not already installed (brew version)"
-    echo " - install ctags if not already installed (brew version)"
+    #echo " - install ctags if not already installed (brew version)"
     echo " - launch locate service"
 else
     echo
