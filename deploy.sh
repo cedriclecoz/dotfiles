@@ -252,5 +252,9 @@ rm -f ~/.brewupdatedate
 printf "$ret\n"
 echo ""
 echo ""
+echo "WARNING,  current deployement is using  my oh-my-zsh template, ${HOME}/.oh-my-zsh/themes/cedric.zsh-theme."
+echo "it invokes the git plugin, which creates lots of aliases for git"
+echo "see: https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh"
+
 echo "you might want to check if ~/.zshrc points correctly to the ~/dotfiles/rcfiles/zshrc and if not redo it, else if you are here, All Good!"
 
