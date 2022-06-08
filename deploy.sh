@@ -1,5 +1,11 @@
 #!/bin/bash
 
+set -e
+
+# keep track of the last executed command
+trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+# echo an error message before exiting
+trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
 CUR_FOLDER=$(pwd)
 
 macstr="Darwin"
@@ -60,20 +66,20 @@ if [ "$(uname)" == "${macstr}" ]; then
         echo "install wget"
         brew install wget
     fi
-    tmp=$(bash --version | grep 'version 3\.')
+    tmp=$(bash --version | grep 'version 3\.' || :)
     if [ "$tmp" == "" ]; then
-        ret="${ret}\nbash at version $(bash --version), ignore"
+        ret="${ret}\nbash at version $(bash --version | head -n1), ignore"
     else
         echo "install bash (brew version)"
         brew install bash
         ret="${ret}\n!!!! bash installed, version: $(bash --version)"
     fi
-    if [ -e /usr/local/bin/ctags ]; then
-        ret="${ret}\ngit already installed, ignore"
-    else
-        echo "install ctags"
-        brew install ctags
-    fi
+    #if [ -e /usr/local/bin/ctags ]; then
+    #    ret="${ret}\ngit already installed, ignore"
+    #else
+    #    echo "install ctags"
+    #    brew install ctags
+    #fi
     if [ ! -e /Applications/iTerm.app ]; then
         echo "install iTerm2"
         brew install Caskroom/cask/iterm2
@@ -149,9 +155,13 @@ libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev x
 fi
 
 
-wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O /tmp/ohmyzsh_install.sh
-sh /tmp/ohmyzsh_install.sh --unattended
-ln -s ${HOME}/dotfiles/omzsh/themes/cedric.zsh-theme ${HOME}/.oh-my-zsh/themes/cedric.zsh-theme
+if [ ! -d ~/.oh-my-zsh ]; then
+    wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O /tmp/ohmyzsh_install.sh
+    sh /tmp/ohmyzsh_install.sh --unattended
+    ln -s ${HOME}/dotfiles/omzsh/themes/cedric.zsh-theme ${HOME}/.oh-my-zsh/themes/cedric.zsh-theme
+else
+    ret="${ret}\noh-my-zsh already installed, ignore"
+fi
 
 if [ ! -e ~/dotfiles ]; then
     echo "Current folder not in ${HOME}, create symbolic link"
@@ -195,7 +205,7 @@ if [ ! -e ~/.gitignore ]; then
     ln -sf ${CUR_FOLDER}/gitignore ~/.gitignore
 else
     ret="${ret}\n~/.gitignore already exist, ignore"
-    ret="${ret}\n    maybe check if ./gitignore and ~/.gitignore can be merged, and a symbolic link created"
+    ret="${ret}\n    maybe check if $(pwd)/gitignore and ~/.gitignore can be merged, and a symbolic link created"
 fi
 if [ ! -e ~/.pyenvrc ]; then
     echo 'deploy pyenvrc'
@@ -224,11 +234,12 @@ if [ ! -e rbenv ]; then
     ln -sf ${CUR_FOLDER}/rbenv ~/.rbenv
 fi
 
-if [ "$(uname)" == "$macstr" ]; then
+if [ "$(uname)" == "$macstr" ] && [ ! -f /tmp/locate_launched ]; then
     cmd="sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist"
     echo "Start locate service (need sudo)."
     echo "    ${cmd}"
     ${cmd}
+    touch /tmp/locate_launched
 fi
 
 #see http://caiustheory.com/git-git-git-git-git/
@@ -238,9 +249,8 @@ git config --global alias.git '!exec git'
 rm -f ~/.brewupdatedate
 
 
-echo ""
-echo ""
-echo "you might want to check if ~/.zshrc points correctly to the ~/dotfiles/rcfiles/zshrc and if not redo it."
-echo ""
-
 printf "$ret\n"
+echo ""
+echo ""
+echo "you might want to check if ~/.zshrc points correctly to the ~/dotfiles/rcfiles/zshrc and if not redo it, else if you are here, All Good!"
+
