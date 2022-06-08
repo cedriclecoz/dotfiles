@@ -36,47 +36,56 @@ fi
 
 read -n1 -r -p "Press a key to continue..." key
 
+mkdir -p ~/.historylogs
 
 if [ "$(uname)" == "${macstr}" ]; then
-#    if [ $(which brew) ]; then
-#        ret="${ret}\nbrew already installed, ignore"
-#    else
-#        echo "install brew"
-#        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-#    fi
-#
-#    if [ $(which git) ]; then
-#        ret="${ret}\ngit already installed, ignore"
-#    else
-#        echo "install git"
-#        brew install git
-#    fi
-#    tmp=$(bash --version | grep 'version 3\.')
-#    if [ "$tmp" == "" ]; then
-#        ret="${ret}\nbash at version $(bash --version), ignore"
-#    else
-#        echo "install bash (brew version)"
-#        brew install bash
-#        ret="${ret}\n!!!! bash installed, version: $(bash --version)"
-#    fi
+    if [ $(which brew) ]; then
+        ret="${ret}\nbrew already installed, ignore"
+    else
+        echo "install brew"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ${HOME}/.zprofile
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+
+    if [ $(which git) ]; then
+        ret="${ret}\ngit already installed, ignore"
+    else
+        echo "install git"
+        brew install git
+    fi
+    if [ $(which wget) ]; then
+        ret="${ret}\nwget already installed, ignore"
+    else
+        echo "install wget"
+        brew install wget
+    fi
+    tmp=$(bash --version | grep 'version 3\.')
+    if [ "$tmp" == "" ]; then
+        ret="${ret}\nbash at version $(bash --version), ignore"
+    else
+        echo "install bash (brew version)"
+        brew install bash
+        ret="${ret}\n!!!! bash installed, version: $(bash --version)"
+    fi
     if [ -e /usr/local/bin/ctags ]; then
         ret="${ret}\ngit already installed, ignore"
     else
         echo "install ctags"
         brew install ctags
     fi
-#    if [ ! -e /Applications/iTerm.app ]; then
-#        echo "install iTerm2"
-#        brew install Caskroom/cask/iterm2
-#    else
-#        ret="${ret}\niTerm2 already exist, ignore"
-#    fi
-#    if [ $(which tmux) ]; then
-#        ret="${ret}\ngit already installed, ignore"
-#    else
-#        echo "install tmux"
-#        brew install tmux
-#    fi
+    if [ ! -e /Applications/iTerm.app ]; then
+        echo "install iTerm2"
+        brew install Caskroom/cask/iterm2
+    else
+        ret="${ret}\niTerm2 already exist, ignore"
+    fi
+    if [ $(which tmux) ]; then
+        ret="${ret}\ngit already installed, ignore"
+    else
+        echo "install tmux"
+        brew install tmux
+    fi
 #     if [ ! -e /usr/local/bin/reattach-to-user-namespace ]; then
 #        ret="${ret}\reattach-to-user-namespace already installed, ignore"
 #    else
@@ -110,15 +119,15 @@ if [ "$(uname)" == "${linuxstr}" ]; then
     else
         echo "do something for bash ?"
     fi
-    if [ -e /usr/local/bin/ctags ]; then
-        ret="${ret}\nctags already installed, ignore"
-    else
-        echo "do something for ctags ?"
-        sudo apt-get install exuberant-ctags
-        if [ -e /usr/bin/ctags ]; then
-            sudo ln -s /usr/bin/ctags /usr/local/bin/ctags
-        fi
-    fi
+    #if [ -e /usr/local/bin/ctags ]; then
+    #    ret="${ret}\nctags already installed, ignore"
+    #else
+    #    echo "do something for ctags ?"
+    #    sudo apt-get install exuberant-ctags
+    #    if [ -e /usr/bin/ctags ]; then
+    #        sudo ln -s /usr/bin/ctags /usr/local/bin/ctags
+    #    fi
+    #fi
     if [ $(which tmux) ]; then
         ret="${ret}\ngit already installed, ignore"
     else
@@ -204,7 +213,7 @@ else
 fi
 if [ ! -e pyenv/plugins/pyenv-virtualenv ]; then
     echo "clone pyenv-virtualenv"
-    git clone https://github.com/yyuu/pyenv.git pyenv/plugins/pyenv-virtualenv
+    git clone https://github.com/pyenv/pyenv-virtualenv.git pyenv/plugins/pyenv-virtualenv
 else
     ret="${ret}\npyenv/plugins/virtualenv already present, ignore"
 fi
@@ -227,5 +236,11 @@ fi
 git config --global alias.git '!exec git'
 
 rm -f ~/.brewupdatedate
+
+
+echo ""
+echo ""
+echo "you might want to check if ~/.zshrc points correctly to the ~/dotfiles/rcfiles/zshrc and if not redo it."
+echo ""
 
 printf "$ret\n"
