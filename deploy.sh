@@ -33,12 +33,20 @@ if [ "$(uname)" == "$macstr" ]; then
     echo " - install brew if not already installed"
     echo " - install up-to-date bash if current version is 3.* (brew version)"
     echo " - install gvim if not already installed (brew version)"
+    echo "        => This is my custom gvim setup, it installs plugins and some keys F1:F9 are predefined to do some actions, see vim/vimrc"
     echo " - install iTerm2 if not already installed (brew version)"
+    echo "         => Terminal, https://iterm2.com"
+    echo " - install rectangle if not already installed (brew version)"
+    echo "         => Windows management, https://rectangleapp.com"
     echo " - install aws cli v2 if not already installed"
+    echo "         => Aws cli, https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
     echo " - install pyenv"
+    echo "         => Python management, https://github.com/pyenv/pyenv"
     echo " - install pyenv virtualenv"
+    echo "         => Python management, https://github.com/pyenv/pyenv-virtualenv"
     echo " - install pyenv python"
     echo " - install rbenv"
+    echo "         => Ruby management, https://github.com/rbenv/rbenv"
 
     #echo " - install ctags if not already installed (brew version)"
     echo " - launch locate service"
@@ -106,6 +114,13 @@ if [ "$(uname)" == "${macstr}" ]; then
     else
         ret="${ret}\niTerm2 already exist, ignore"
     fi
+    if [ ! -e /Applications/Rectangle.app ]; then
+        echo "install rectangle"
+        brew install --cask rectangle
+    else
+        ret="${ret}\nRectangle already exist, ignore"
+    fi
+
     if [ $(which tmux) ]; then
         ret="${ret}\ngit already installed, ignore"
     else
@@ -244,7 +259,7 @@ fi
 
 if [ ! -e pyenv ]; then
     echo "clone pyenv"
-    git clone https://github.com/yyuu/pyenv.git pyenv
+    git clone https://github.com/pyenv/pyenv.git pyenv
     ln -sf ${CUR_FOLDER}/pyenv ~/.pyenv
 else
     ret="${ret}\npyenv already present, ignore"
