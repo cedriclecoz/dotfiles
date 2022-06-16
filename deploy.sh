@@ -288,10 +288,18 @@ else
     
 fi
 
-if [ ! -e rbenv ]; then
+if [ ! -d rbenv ]; then
     echo "clone rbenv"
     git clone https://github.com/rbenv/rbenv.git
     ln -sf ${CUR_FOLDER}/rbenv ~/.rbenv
+else
+    ret="${ret}\nrbenv already present, ignore"
+fi
+if [ ! -d rbenv/plugins/ruby-build ]; then
+    echo "clone rbenv"
+    git clone https://github.com/rbenv/rbenv.git rbenv/plugins/ruby-build
+else
+    ret="${ret}\nrbenv/plugins/ruby-build already present, ignore"
 fi
 
 if [ "$(uname)" == "$macstr" ] && [ ! -f /tmp/locate_launched ]; then
