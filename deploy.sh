@@ -47,6 +47,7 @@ if [ "$(uname)" == "$macstr" ]; then
     echo " - install pyenv python"
     echo " - install rbenv"
     echo "         => Ruby management, https://github.com/rbenv/rbenv"
+    echo " - install npm"
 
     #echo " - install ctags if not already installed (brew version)"
     echo " - launch locate service"
@@ -153,6 +154,20 @@ if [ "$(uname)" == "${macstr}" ]; then
         wget https://awscli.amazonaws.com/AWSCLIV2.pkg -O /tmp/awscliv2.pkg
         sudo installer -pkg /tmp/awscliv2.pkg -target /
     fi
+
+    if [ $(which npm) ]; then
+        ret="${ret}\nnpm already installed, ignore"
+    else
+        echo "install npm"
+        brew install npm
+    fi
+    if [ $(which aws-azure-login) ]; then
+        ret="${ret}\aws-azure-login already installed, ignore"
+    else
+        echo "install aws-azure-login"
+        brew install aws-azure-login
+    fi
+
 fi
 if [ "$(uname)" == "${linuxstr}" ]; then
 
@@ -301,6 +316,10 @@ if [ ! -d rbenv/plugins/ruby-build ]; then
 else
     ret="${ret}\nrbenv/plugins/ruby-build already present, ignore"
 fi
+
+
+
+
 
 if [ "$(uname)" == "$macstr" ] && [ ! -f /tmp/locate_launched ]; then
     cmd="sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist"

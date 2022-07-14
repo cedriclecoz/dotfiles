@@ -141,6 +141,8 @@ function sshdelssh {
 #needed in zsh to use wildards.. ie.. scp xxx:~/toto* .
 alias scp='noglob scp'
 
+
+alias aws-decode='aws sts decode-authorization-message --encoded-message'
 # ------------------
 # git----------
 # ------------------
@@ -255,9 +257,41 @@ Date='\D{%m.%d}'
 Uname="\u"
 Hostname="\h"
 
+aws-ssh(){
+  instance_name=${1}
+  if [ "$1" != "" ]; then
+      instance_id=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=${instance_name}" --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" --output text)
+      if [ $? -eq 0 ] && [ "${instance_id}" != "" ]; then
+          aws ssm start-session --target ${instance_id}
+      else
+         echo "[ERROR] $1 does not exist or is not running"
+      fi
+  else
+     echo "please specify instance to connect to..."
+  fi
+}
+
+aws-ssm-ports(){
+  instance_name=${1}
+  remote_port=${2}
+  local_port=${3}
+  if [ $# -eq 3 ]; then
+      instance_id=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=${instance_name}" --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" --output text)
+      if [ $? -eq 0 ] && [ "${instance_id}" != "" ]; then
+          aws ssm start-session --target ${instance_id} --document-name AWS-StartPortForwardingSession --parameters "{\"portNumber\":[\"${remote_port}\"], \"localPortNumber\":[\"${local_port}\"]}"
+      else
+         echo "[ERROR] $1 does not exist or is not running"
+      fi
+  else
+     echo "please specify instance to connect to and ports ($#):"
+     echo "$0 instanceName remotePort localPort"
+  fi
+}
+
 
 # project_aliases
 if [ -e ~/.project_aliases ]; then
     source ~/.project_aliases
 fi
+
 

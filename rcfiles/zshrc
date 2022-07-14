@@ -106,6 +106,14 @@ precmd() { if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pw
 #do not share history between terminals.
 setopt no_share_history
 unsetopt share_history
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_BEEP
 
 
 # # enable color support of ls and also add handy aliases
@@ -167,3 +175,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 #export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 export PATH="$PATH:$HOME/.rvm/bin"
+
+eval "$(saml2aws --completion-script-zsh)"
+
