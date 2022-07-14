@@ -165,7 +165,7 @@ if [ "$(uname)" == "${macstr}" ]; then
         ret="${ret}\aws-azure-login already installed, ignore"
     else
         echo "install aws-azure-login"
-        brew install aws-azure-login
+        npm install -g aws-azure-login
     fi
 
 fi
