@@ -63,9 +63,9 @@ read -n1 -r -p "Press a key to continue..." key
 mkdir -p ~/.historylogs
 
 if [ "$(uname)" == "${macstr}" ]; then
-    if [ "$(uname -m)" != "x86_64" ] && [ ! -f /tmp/rosetta_installed ]; then
+    if [ "$(uname -m)" != "x86_64" ] && [ ! -f ~/.rosetta_installed ]; then
         softwareupdate --install-rosetta
-        touch /tmp/rosetta_installed
+        touch ~/.rosetta_installed
     fi
     if [ $(which brew) ]; then
         ret="${ret}\nbrew already installed, ignore"

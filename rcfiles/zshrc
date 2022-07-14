@@ -176,5 +176,5 @@ export PATH=$JAVA_HOME/bin:$PATH
 #export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 export PATH="$PATH:$HOME/.rvm/bin"
 
-eval "$(saml2aws --completion-script-zsh)"
+#eval "$(saml2aws --completion-script-zsh)"
 
