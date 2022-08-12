@@ -169,7 +169,7 @@ if [ -f ~/.iterm2_shell_integration.zsh ]; then
 fi
 
 #export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home
 export PATH=$JAVA_HOME/bin:$PATH
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
