@@ -260,9 +260,18 @@ Hostname="\h"
 aws-ssh(){
   instance_name=${1}
   if [ "$1" != "" ]; then
-      instance_id=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=${instance_name}" --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" --output text)
+      profile="default"
+      if [ "$2" != "" ]; then
+         cat ~/.aws/credentials | grep "\[$2\]"
+         if [ $? -ne 0 ]; then
+             echo "profile $2 not in ~/.aws/credentials.... abort.." 
+             return -1
+         fi  
+         profile="$2"
+      fi
+      instance_id=$(aws --profile ${profile} ec2 describe-instances --filter "Name=tag:Name,Values=${instance_name}" --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" --output text)
       if [ $? -eq 0 ] && [ "${instance_id}" != "" ]; then
-          aws ssm start-session --target ${instance_id}
+          aws --profile ${profile} ssm start-session --target ${instance_id}
       else
          echo "[ERROR] $1 does not exist or is not running"
       fi
