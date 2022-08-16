@@ -257,6 +257,8 @@ Date='\D{%m.%d}'
 Uname="\u"
 Hostname="\h"
 
+alias azl="aws-azure-login --all-profiles --no-prompt --mode gui --force-refresh"
+
 aws-ssh(){
   instance_name=${1}
   if [ "$1" != "" ]; then
