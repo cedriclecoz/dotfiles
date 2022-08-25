@@ -137,9 +137,9 @@ if [ -f ~/dotfiles/rcfiles/aliases ]; then
     . ~/dotfiles/rcfiles/aliases
 fi
 
-if [ -d ~/dotfiles/scripts ]; then
-    . ~/dotfiles/scripts/*.sh
-fi
+#if [ -d ~/dotfiles/scripts ]; then
+#    . ~/dotfiles/scripts/*.sh
+#fi
 
 if [ -f ~/.project_aliases ]; then  #Used for aliases which should not be posted on github (dotfiles)
     . ~/.project_aliases
