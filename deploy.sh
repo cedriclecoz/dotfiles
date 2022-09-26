@@ -49,7 +49,7 @@ if [ "$(uname)" == "$macstr" ]; then
     echo "         => Ruby management, https://github.com/rbenv/rbenv"
     echo " - install npm"
 
-    #echo " - install ctags if not already installed (brew version)"
+    echo " - install ctags if not already installed (brew version)"
     echo " - launch locate service"
 else
     echo
@@ -103,12 +103,12 @@ if [ "$(uname)" == "${macstr}" ]; then
         brew install bash
         ret="${ret}\n!!!! bash installed, version: $(bash --version)"
     fi
-    #if [ -e /usr/local/bin/ctags ]; then
-    #    ret="${ret}\ngit already installed, ignore"
-    #else
-    #    echo "install ctags"
-    #    brew install ctags
-    #fi
+    if [ -e /usr/local/bin/ctags ]; then
+        ret="${ret}\ngit already installed, ignore"
+    else
+        echo "install ctags"
+        brew install ctags
+    fi
     if [ ! -e /Applications/iTerm.app ]; then
         echo "install iTerm2"
         brew install Caskroom/cask/iterm2
