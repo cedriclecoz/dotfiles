@@ -150,9 +150,6 @@ export PATH="$HOME/bin:$PATH"
 export PATH=$(brew --prefix openvpn)/sbin:$PATH
 
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 if [ -f ~/dotfiles/rcfiles/pyenvrc ]; then
     . ~/dotfiles/rcfiles/pyenvrc
 fi
@@ -177,4 +174,5 @@ export PATH=$JAVA_HOME/bin:$PATH
 export PATH="$PATH:$HOME/.rvm/bin"
 
 #eval "$(saml2aws --completion-script-zsh)"
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 

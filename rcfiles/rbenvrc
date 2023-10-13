@@ -1,3 +1,14 @@
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-eval "$(rbenv init -)"
+PRT=""
+if [ -n "$ZSH_VERSION" ]; then
+   # assume Zsh
+   PRT="zsh"
+elif [ -n "$BASH_VERSION" ]; then
+   # assume Bash
+   PRT="bash"
+else
+   # assume something else
+fi
+
+eval "$(rbenv init - $PRT)"

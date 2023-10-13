@@ -149,7 +149,7 @@ alias aws-decode='aws sts decode-authorization-message --encoded-message'
 
 # ( these will me moved to the git config)
 alias gl='git pull '
-alias gh='git push'
+#alias gh='git push'
 alias glom='git pull origin master '
 alias ghom='git push origin master'
 alias gd='git difftool --tool=gvimdiff'
@@ -257,7 +257,8 @@ Date='\D{%m.%d}'
 Uname="\u"
 Hostname="\h"
 
-alias azl="aws-azure-login --all-profiles --no-prompt --mode gui --force-refresh"
+#moved to ~/.project_aliases, using function with aadawscli
+#alias azl="aws-azure-login --all-profiles --no-prompt --mode gui --force-refresh"
 
 aws-ssh(){
   instance_name=${1}
@@ -284,10 +285,10 @@ aws-ssh(){
 }
 
 aws-ssm-ports(){
+  #!/usr/bin/env zsh
   instance_name=${1}
   remote_port=${2}
   local_port=${3}
-  if [ $# -lt 3 ]; then
       profile="default"
       if [ "$4" != "" ]; then
          cat ~/.aws/credentials | grep "\[$4\]"
@@ -305,10 +306,6 @@ aws-ssm-ports(){
       else
          echo "[ERROR] $1 does not exist or is not running"
       fi
-  else
-     echo "please specify instance to connect to and ports ($#):"
-     echo "$0 instanceName remotePort localPort"
-  fi
 }
 
 
