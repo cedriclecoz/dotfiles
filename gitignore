@@ -37,3 +37,4 @@ vim/vim/plugged/taglist.vim
 rbenv/
 vim/vim/autoload/
 vim/vim/plugged/
+slack_user_association.json

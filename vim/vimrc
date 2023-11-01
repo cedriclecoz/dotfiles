@@ -5,9 +5,6 @@ map ; :Files<CR>
 "Highlight search 
 set hlsearch
 
-"Vi Theme
-colors evening
-
 "indent 4spaces
 filetype plugin indent on
 set tabstop=4
@@ -68,3 +65,5 @@ augroup END
 highlight link myTodo Todo
 
 
+
+colorscheme evening
