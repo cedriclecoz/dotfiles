@@ -302,7 +302,7 @@ aws-ssm-ports(){
       instance_id=$(aws --profile ${profile} ec2 describe-instances --filter "Name=tag:Name,Values=${instance_name}" --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" --output text)
       echo ${instance_id}
       if [ $? -eq 0 ] && [ "${instance_id}" != "" ]; then
-          aws --profile ${profile} ssm start-session --target ${instance_id} --document-name AWS-StartPortForwardingSession --parameters "{\"portNumber\":[\"${remote_port}\"], \"localPortNumber\":[\"${local_port}\"]}"
+          aws --profile ${profile} ssm start-session --target ${instance_id} --document-name http_portfwd --parameters "{\"portNumber\":[\"${remote_port}\"], \"localPortNumber\":[\"${local_port}\"]}"
       else
          echo "[ERROR] $1 does not exist or is not running"
       fi
