@@ -38,3 +38,4 @@ rbenv/
 vim/vim/autoload/
 vim/vim/plugged/
 slack_user_association.json
+2rm/
