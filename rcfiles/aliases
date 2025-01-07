@@ -149,14 +149,10 @@ alias aws-decode='aws sts decode-authorization-message --encoded-message'
 
 # ( these will me moved to the git config)
 alias gl='git pull '
-#alias gh='git push'
-alias glom='git pull origin master '
-alias ghom='git push origin master'
 alias gd='git difftool --tool=gvimdiff'
 alias gc='git commit'
 alias gca='git commit -a'
 alias gco='git checkout'
-#alias gb='git branch'
 alias gs='git status'
 alias gsb='git status -sb'
 alias gss='git status -s' # short, waffle-free

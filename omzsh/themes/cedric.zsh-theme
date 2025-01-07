@@ -30,7 +30,7 @@ function cedric_root_prompt(){
 
 #allpyenvversions=$(source ~/.pyenvrc; pyenv versions)
 
-function pyenv_virtualenv() {
+#function pyenv_virtualenv() {
 #    currentversions=$(pyenv version | cut -d' ' -f1 | sed 's/\n/ /g')
 #    echo
 #    
@@ -52,7 +52,7 @@ function pyenv_virtualenv() {
 #        PYTHON_STR="${PYTHON_STR})"
 #    fi
 #    echo $PYTHON_STR
-}
+#}
 
 # These Git variables are used by the oh-my-zsh git_prompt_info helper:
 ZSH_THEME_GIT_PROMPT_PREFIX=""
@@ -67,5 +67,5 @@ CEDRIC_DIR="${CEDRIC_DIR_COLOR}%~"
 CEDRIC_PROMPT="${CEDRIC_BRACKET_COLOR}> "
 
 # Put it all together!
-PROMPT=$'\$(pyenv_virtualenv)${CEDRIC_TIME}%m \$(cedric_git_prompt)${CEDRIC_DIR}\$(cedric_root_prompt)${CEDRIC_PROMPT}%{$reset_color%}'
+PROMPT=$'${CEDRIC_TIME}%m \$(cedric_git_prompt)${CEDRIC_DIR}\$(cedric_root_prompt)${CEDRIC_PROMPT}%{$reset_color%}'
 
