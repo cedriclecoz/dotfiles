@@ -268,10 +268,14 @@ aws-ssh(){
          fi  
          profile="$2"
       fi
-      instance_id=$(aws --profile ${profile} ec2 describe-instances --filter "Name=tag:Name,Values=${instance_name}" --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" --output text)
+      if [[ $instance_name == i-* ]]; then
+         instance_id=$instance_name 
+      else
+         instance_id=$(aws --profile ${profile} --region us-east-1 ec2 describe-instances --filter "Name=tag:Name,Values=${instance_name}" --query "Reservations[].Instances[?State.Name == 'running'].InstanceId[]" --output text)
+      fi
       echo ${instance_id}
       if [ $? -eq 0 ] && [ "${instance_id}" != "" ]; then
-          aws --profile ${profile} ssm start-session --target ${instance_id}
+          aws --profile ${profile} --region us-east-1 ssm start-session --target ${instance_id}
       else
          echo "[ERROR] $1 does not exist or is not running"
       fi
